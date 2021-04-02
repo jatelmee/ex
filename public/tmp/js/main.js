@@ -1,5 +1,6 @@
 window.addEventListener('load',()=>{
-    const btnClickHandler = (formId) => {
+    const btnClickHandler = (element) => {
+        const formId = element.getAttribute('data-form-id');
         const form = document.querySelector(formId);
         form.classList.toggle('show');
     }
@@ -8,7 +9,7 @@ window.addEventListener('load',()=>{
 
     btns.forEach(btn=>{
         btn.addEventListener('click',()=>{
-            btnClickHandler('#perfect-form')
+            btnClickHandler(btn)
         })
     })
 })

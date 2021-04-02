@@ -66,6 +66,6 @@ h3{text-align: center; padding: 30px; font-size: 27px}
     height: 100vh;
     background-color: #4f4f4f;
 }
-.show{display: flex;}
-.none{display: none;}
+#perfect-form.show{display: flex;}
+#perfect-form.none{display: none;}
 
