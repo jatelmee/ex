@@ -33,4 +33,51 @@ function logOut(){
     unset($_SESSION['username']);
     unset($_SESSION['email']);
 }
+function btc(){
+    $array = file_get_contents("https://api.cryptonator.com/api/ticker/btc-usd");
+    $array = json_decode($array, true);
+    $result = [
+        'base'     => $array['ticker']['base'],
+        'target'   => $array['ticker']['target'],
+        'price'    => $array['ticker']['price'],
+        'change24' => $array['ticker']['change'],
+    ];
+    return $result['price'];
+}
+function ltc(){
+    $array = file_get_contents('https://api.cryptonator.com/api/ticker/LTC-usd');
+    $array = json_decode($array, true);
+    $price = $array['ticker']['price'];
+    return $price;
+}
+function eth(){
+    $array = file_get_contents('https://api.cryptonator.com/api/ticker/ETH-usd');
+    $array = json_decode($array, true);
+    $price = $array['ticker']['price'];
+    return $price;
+}
+function xrp(){
+    $array = file_get_contents('https://api.cryptonator.com/api/ticker/XRP-usd');
+    $array = json_decode($array, true);
+    $price = $array['ticker']['price'];
+    return $price;
+}
+function ton(){
+    $array = file_get_contents('https://api.cryptonator.com/api/ticker/TON-usd');
+    $array = json_decode($array, true);
+    $price = $array['ticker']['price'];
+    return $price;
+}
+function xmr(){
+    $array = file_get_contents('https://api.cryptonator.com/api/ticker/xmr-usd');
+    $array = json_decode($array, true);
+    $price = $array['ticker']['price'];
+    return $price;
+}
+function price($base, $target){
+    $array = file_get_contents('https://api.cryptonator.com/api/ticker/'.$base.'-'.$target);
+    $array = json_decode($array, true);
+    $price = $array['ticker']['price'];
+    return round($price, 2, PHP_ROUND_HALF_UP);
+}
 

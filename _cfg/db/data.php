@@ -20,10 +20,16 @@ function login($email, $password){
     global $pdo;
     $query = $pdo->query("SELECT * FROM users WHERE  email = '$email' AND password = '$password'");
     $user = $query->fetch(PDO::FETCH_OBJ);
-    $_SESSION['id'] = $user->id;
-    $_SESSION['username'] = $user->username;
-    $_SESSION['email'] = $user->email;
+    if (isset($user->id)){
+        $_SESSION['id'] = $user->id;
+        $_SESSION['username'] = $user->username;
+        $_SESSION['email'] = $user->email;
+    }
+    else{
+        $_SESSION['message'] = 'Неверный логин или пароль';
+    }
 }
+
 
 function register($pdo, $username, $password, $email){
     $sql = "INSERT INTO users(username, password, email) VALUES(:username, :password, :email)";
@@ -37,11 +43,28 @@ function createTicket($email, $umi, $curr, $wallet){
     $query = $pdo->prepare($sql);
     $query->execute(['umi' => $umi, 'curr' => $curr, 'wallet' => $wallet, 'email' => $email]);
 }
-function getData($pdo){
-    $query = $pdo->query("SELECT * FROM users");
+function getUsr(){
+    global $pdo;
+    $query = $pdo->query("SELECT * FROM users ORDER BY id");
+    echo "<div class='table-usr'><ul>";
+    $c = 1;
     while ($row = $query->fetch(PDO::FETCH_OBJ)){
-        echo '<li>'.$row->email.'</li>';
+        echo '<li>'.$c.' '.$row->email.'</li>';
+        $c++;
     }
+    echo "</ul></div>";
+}
+function getTickets(){
+    global $pdo;
+    $query = $pdo->query("SELECT * FROM tickets ORDER BY id");
+    echo "<div class='table-usr'><ul>";
+    $c = 1;
+    while ($row = $query->fetch(PDO::FETCH_OBJ)){
+/*        echo '<li>'.$c.' '.$row->email.'</li>';
+        $c++;*/
+        var_dump($row);
+    }
+    echo "</ul></div>";
 }
 
 

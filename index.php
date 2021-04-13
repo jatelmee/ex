@@ -5,12 +5,21 @@ $cfg = require 'core/vars.php';
 require_once 'core/core.php';
 require_once '_cfg/db/data.php';
 $su = require '_cfg/admin.php';
-
+$_SESSION['message'] = '';
 $page_name = $cfg['siteName'].' '.$cfg['uri'];
 
 
 
 require 'public/tmp/header.php';
+if ($cfg['uri'] == 'p'){
+    echo "<pre>";
+    $str = file_get_contents('https://api.cryptonator.com/api/ticker/btc-usd');
+    $str = json_decode($str, true);
+    print_r($str);
+    echo $str['ticker']['base'];
+    echo "</pre>";
+
+}
 if ($cfg['uri'] == ''){
     require 'public/tmp/index.php';
 }
@@ -18,6 +27,13 @@ if ($cfg['uri'] == 'login'){
     if (uid()){
         redirect();
     }else{
+        if (isset($_POST['email']) and isset($_POST['password'])){
+            if ($_POST['email'] == '' or $_POST['password'] == ''){
+                $_SESSION['message'] = 'Заполните форму';
+            }else{
+                login($_POST['email'], $_POST['password']);
+            }
+        }
         require 'public/tmp/login.php';
     }
 }
@@ -42,6 +58,13 @@ if ($cfg['uri'] == 'ticket'){
     if (isset($_SESSION['ticket'])){
         require 'public/tmp/ticket.php';
     }else{redirect();}
+}
+if ($cfg['uri'] == 'admin'){
+    if ($_SESSION['username'] != $su['login']){
+        echo '<script>document.location.href = "/";</script>';
+        end();
+    }
+    require 'public/tmp/admin/index.php';
 }
 require 'public/tmp/footer.php';
 
