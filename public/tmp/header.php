@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="public/tmp/css/style.css">
     <link rel="stylesheet" href="public/tmp/css/media.css">
     <script src="public/tmp/js/main.js"></script>
+    <script src="public/tmp/js/jquery.js"></script>
     <title><?= $page_name ?></title>
 </head>
 <body>

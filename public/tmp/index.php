@@ -1,3 +1,8 @@
+<?php
+api();
+?>
+
+
 <div class="container">
     <div class="first-block">
         <h2>UMI => $</h2>

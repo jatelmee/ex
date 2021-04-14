@@ -80,4 +80,14 @@ function price($base, $target){
     $price = $array['ticker']['price'];
     return round($price, 2, PHP_ROUND_HALF_UP);
 }
+function api(){
+    if (isset($_POST['base']) and isset($_POST['amount']) and isset($_POST['target'])){
+        $jsn =[
+            'profit' => $_POST['amount'] * price($_POST['base'], $_POST['target']),
+        ];
+/*        return json_encode($jsn);*/
+        return $jsn;
+    }
+    return 0;
+}
 
