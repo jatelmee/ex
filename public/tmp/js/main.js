@@ -21,6 +21,14 @@ $(()=>{
         $form.toggleClass('show');
     }
 
+
+    const exchangeBtnClickHandler= () => {
+        console.log({
+            selectedCurrency,
+            currencyAmount
+        })
+    }
+
     const inputChangeHandler = (e) => {
         const value = e.target.value
         currencyAmount = parseInt(value,10)
@@ -39,4 +47,13 @@ $(()=>{
     inputs.each((idx,input)=>{
         $(input).on('change',inputChangeHandler)
     })
+
+
+    const exchangeBtns = $('.exchange-btn');
+
+
+    exchangeBtns.each((idx,btn)=>{
+        $(btn).on('click',exchangeBtnClickHandler)
+    })
+
 })
