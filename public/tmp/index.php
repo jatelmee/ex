@@ -31,19 +31,13 @@ api();
     <div class="ex-div">
         <div>
             <h3>Отдаю</h3>
-
         </div>
         <div>
             <h3>Получаю</h3>
         </div>
     </div>
 
-    <div id="perfect-form">
-        <div class="form-btn" data-form-id="#perfect-form">X</div>
-    </div>
-    <div id="payoneer-form">
-        <div class="form-btn" data-form-id="#payoneer-form">X</div>
-    </div>
+
 
 
 

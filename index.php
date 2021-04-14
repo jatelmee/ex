@@ -11,11 +11,12 @@ $page_name = $cfg['siteName'].' '.$cfg['uri'];
 
 
 require 'public/tmp/header.php';
-if ($cfg['uri'] == 'p'){
-    $_POST['base'] = 'btc';
+if ($cfg['uri'] == 'test'){
+    /*$_POST['base'] = 'btc';
     $_POST['amount'] = 2;
     $_POST['target'] = 'usd';
-    var_dump(api());
+    var_dump(api());*/
+    require 'test.php';
 }
 if ($cfg['uri'] == ''){
     require 'public/tmp/index.php';
