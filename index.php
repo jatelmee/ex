@@ -12,13 +12,10 @@ $page_name = $cfg['siteName'].' '.$cfg['uri'];
 
 require 'public/tmp/header.php';
 if ($cfg['uri'] == 'p'){
-    echo "<pre>";
-    $str = file_get_contents('https://api.cryptonator.com/api/ticker/btc-usd');
-    $str = json_decode($str, true);
-    print_r($str);
-    echo $str['ticker']['base'];
-    echo "</pre>";
-
+    $_POST['base'] = 'btc';
+    $_POST['amount'] = 2;
+    $_POST['target'] = 'usd';
+    var_dump(api());
 }
 if ($cfg['uri'] == ''){
     require 'public/tmp/index.php';
