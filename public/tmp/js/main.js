@@ -1,17 +1,42 @@
-window.addEventListener('load',()=>{
+
+$(()=>{
+    //forms logic
+    let selectedCurrency = null
+    let currencyAmount = 0
+
     const btnClickHandler = (element) => {
-        const formId = element.getAttribute('data-form-id');
-        const form = document.querySelector(formId);
-        form.classList.toggle('show');
+        const $element = $(element)
+
+        const formId = $element.attr('data-form-id');
+        selectedCurrency = $element.attr('data-currency-type')
+        
+        const $form = $(formId)
+        
+
+        //check if form closed
+        if($form.hasClass('show')){
+            selectedCurrency = null
+        }
+
+        $form.toggleClass('show');
     }
 
-    const btns = document.querySelectorAll('.form-btn')
+    const inputChangeHandler = (e) => {
+        const value = e.target.value
+        currencyAmount = parseInt(value,10)
+    }
 
-    btns.forEach(btn=>{
-        btn.addEventListener('click',()=>{
+    const btns = $('.form-btn')
+    btns.each((idx,btn)=>{
+        $(btn).on('click',()=>{
             btnClickHandler(btn)
         })
     })
+    
+
+    const inputs = $('.exchange-input')
+
+    inputs.each((idx,input)=>{
+        $(input).on('change',inputChangeHandler)
+    })
 })
-
-
