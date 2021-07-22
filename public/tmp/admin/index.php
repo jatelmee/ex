@@ -1,9 +1,3 @@
-<?php
-getUsr();
-getTickets();
-?>
+<div class="container">
 
-
-
-
-
+</div>

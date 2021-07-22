@@ -1,59 +1,12 @@
 
 $(()=>{
-    //forms logic
-    let selectedCurrency = null
-    let currencyAmount = 0
-
-    const btnClickHandler = (element) => {
-        const $element = $(element)
-
-        const formId = $element.attr('data-form-id');
-        selectedCurrency = $element.attr('data-currency-type')
-        
-        const $form = $(formId)
-        
-
-        //check if form closed
-        if($form.hasClass('show')){
-            selectedCurrency = null
+    if (window.location.pathname == '/line'){
+        let btn_s = document.getElementsByClassName('type-btn');
+        for (let i = 0; i<btn_s.length; i++){
+            if (btn_s[i].href == uri){
+                btn_s[i].classList.add('active');
+            }
         }
-
-        $form.toggleClass('show');
     }
-
-
-    const exchangeBtnClickHandler= () => {
-        console.log({
-            selectedCurrency,
-            currencyAmount
-        })
-    }
-
-    const inputChangeHandler = (e) => {
-        const value = e.target.value
-        currencyAmount = parseInt(value,10)
-    }
-
-    const btns = $('.form-btn')
-    btns.each((idx,btn)=>{
-        $(btn).on('click',()=>{
-            btnClickHandler(btn)
-        })
-    })
-    
-
-    const inputs = $('.exchange-input')
-
-    inputs.each((idx,input)=>{
-        $(input).on('change',inputChangeHandler)
-    })
-
-
-    const exchangeBtns = $('.exchange-btn');
-
-
-    exchangeBtns.each((idx,btn)=>{
-        $(btn).on('click',exchangeBtnClickHandler)
-    })
 
 })

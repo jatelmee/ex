@@ -1,7 +1,7 @@
 <?php
 return [
     'host' => 'localhost',
-    'name' => 'samurai113_ex1',
-    'user' => 'samurai113_ex1',
-    'password' => 'VxaY9xS&',
+    'name' => 'ivanovpro_bk',
+    'user' => 'ivanovpro_bk',
+    'password' => 'wwwX*7&Y',
 ];

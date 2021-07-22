@@ -1,5 +1,5 @@
 <?php
 return[
-    'siteName' => 'ex',
+    'siteName' => 'CyberPRO',
     'uri' => str_replace('/', '', $_SERVER['REQUEST_URI']),
 ];

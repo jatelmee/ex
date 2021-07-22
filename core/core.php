@@ -10,19 +10,20 @@ function debug($str) {
     echo '</pre>';
     exit;
 }
-function redirect(){
-    echo '<script>document.location.href = "/";</script>';
+function redirect($href = '/'){
+    echo '<script>document.location.href = "'.$href.'";</script>';
 }
+
 function adminBtn(){
     $su = require '_cfg/admin.php';
     if (isset($_SESSION['username'])){
-        if ($_SESSION['username'] == $su['login']){
+        if ($_SESSION['email'] == $su['login']){
             echo '<a href="/admin">'.$su['login'].'</a><br>';
         }
     }
 }
 function uid(){
-    if (isset($_SESSION['id']) and isset($_SESSION['username']) and isset($_SESSION['email'])){
+    if (isset($_SESSION['id']) and isset($_SESSION['username']) and isset($_SESSION['surname']) and isset($_SESSION['email'])){
         return true;
     }
     return false;
@@ -31,6 +32,7 @@ function uid(){
 function logOut(){
     unset($_SESSION['id']);
     unset($_SESSION['username']);
+    unset($_SESSION['surname']);
     unset($_SESSION['email']);
 }
 function btc(){
@@ -44,36 +46,7 @@ function btc(){
     ];
     return $result['price'];
 }
-function ltc(){
-    $array = file_get_contents('https://api.cryptonator.com/api/ticker/LTC-usd');
-    $array = json_decode($array, true);
-    $price = $array['ticker']['price'];
-    return $price;
-}
-function eth(){
-    $array = file_get_contents('https://api.cryptonator.com/api/ticker/ETH-usd');
-    $array = json_decode($array, true);
-    $price = $array['ticker']['price'];
-    return $price;
-}
-function xrp(){
-    $array = file_get_contents('https://api.cryptonator.com/api/ticker/XRP-usd');
-    $array = json_decode($array, true);
-    $price = $array['ticker']['price'];
-    return $price;
-}
-function ton(){
-    $array = file_get_contents('https://api.cryptonator.com/api/ticker/TON-usd');
-    $array = json_decode($array, true);
-    $price = $array['ticker']['price'];
-    return $price;
-}
-function xmr(){
-    $array = file_get_contents('https://api.cryptonator.com/api/ticker/xmr-usd');
-    $array = json_decode($array, true);
-    $price = $array['ticker']['price'];
-    return $price;
-}
+
 function price($base, $target){
     $array = file_get_contents('https://api.cryptonator.com/api/ticker/'.$base.'-'.$target);
     $array = json_decode($array, true);
@@ -85,9 +58,38 @@ function api(){
         $jsn =[
             'profit' => $_POST['amount'] * price($_POST['base'], $_POST['target']),
         ];
-/*        return json_encode($jsn);*/
-        return $jsn;
+        return json_encode($jsn);
     }
     return 0;
+}
+function toFill($val){
+    if (isset($_POST[$val]) and $_POST[$val] != ''){
+        return $_POST[$val];
+    }
+    else{return '';}
+}
+function replaceBet($bet){
+    $arr = [
+        'p1' =>'П1',
+        'p2' =>'П2',
+        'b25' =>'Больше 2,5',
+        'm25' =>'Меньше 2,5',
+        'f1_m15' =>'Фора 1(-1,5)',
+        'f2_m15' =>'Фора 2(-1,5)',
+        'f1_15' =>'Фора 1(1,5)',
+        'f2_15' =>'Фора 2(1,5)',
+        'ts20' =>'Точный счёт 2:0',
+        'ts02' =>'Точный счёт 0:2',
+        'ts21' =>'Точный счёт 2:1',
+        'ts12' =>'Точный счёт 1:2',
+        'k1p1' =>'Карта 1 П1',
+        'k1p2' =>'Карта 1 П2',
+        'k2p1' =>'Карта 2 П1',
+        'k2p2' =>'Карта 2 П2',
+        'tc' =>'Тотал чётный',
+        'tnc' =>'Тотал нечётный',
+    ];
+    return $arr[$bet];
+
 }
 
